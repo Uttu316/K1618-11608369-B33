@@ -41,3 +41,48 @@ int main()
     {
         printf("\n|\tP%d\t|\t %d\t\t|\t\t%d\t|\t %d \t |",p[i].i,p[i].Arrival_Time,p[i].Burst_time,p[i].Priority);
         printf("\n|_______________|_______________________|_______________________|________________|");
+    }
+        for(int time=0;pl!=0;time++)
+    {
+        for(int i=0;i<n;i++)                                                                    //priority increment
+        {
+            if(p[i].rect==-1 && p[i].flag==1)
+            {
+                if((time)%10==(p[i].Arrival_Time)%10)
+                {
+                    p[i].Priority++;
+                    printf("\n\tPriority of process P%d increasing by 1.",p[i].i);
+                    node *x;
+                    x=start;
+                    while(x->next->q->i==i)
+                        x=x->next;
+                    cn=new node;
+                    cn->q=x->next->q;
+                    cn->next=NULL;
+                    x->next=x->next->next;
+                    if(start==NULL)
+                    {
+                        last=cn;
+                        start=cn;
+                    }
+                    else{
+                        node *x;
+                        x=start;
+                        if((start->q->Priority)<(cn->q->Priority))
+                        {
+                            cn->next=start;
+                            start=cn;
+                        }
+                        else
+                        {
+                             while(x->next!=NULL && x->next->q->Priority > cn->q->Priority)
+                            {
+                                x=x->next;
+                            }
+                            cn->next=x->next;
+                            x->next=cn;
+                        }
+                    }
+                }
+            }
+        }
