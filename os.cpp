@@ -86,3 +86,57 @@ int main()
                 }
             }
         }
+        for(int i=0;i<n;i++)
+        {
+            if(p[i].Arrival_Time==time && p[i].flag==0)                                                //in the queue
+            {
+            
+                if(start==NULL)
+                {
+                	
+                    p[i].flag=1;
+                    cn=new node;
+                    cn->q=&p[i];
+                    cn->next=NULL;
+                    last=cn;
+                    start=cn;
+                }
+                else{
+                    p[i].flag=1;
+                    cn=new node;
+                    cn->q=&p[i];
+                    node *x;
+                    x=start;
+                    if((start->q->Priority)<(cn->q->Priority))
+                    {
+                        cn->next=start;
+                        start=cn;
+                    }
+                    else
+                    {
+                    	
+                        while(x->next!=NULL && x->next->q->Priority>= cn->q->Priority)
+                        {
+                            x=x->next;
+                        } 
+                        cn->next=x->next;
+                        x->next=cn;
+                    }
+                }
+            }
+        }
+    back:
+        if(run==NULL)   //running of process
+        {
+            if(start!=NULL)
+            {
+                run=start->q;
+                start=start->next;
+                if(run->firstt==-1)
+                {
+                    run->firstt=time;
+                }
+                run->rect=time;
+                
+            }
+        }
