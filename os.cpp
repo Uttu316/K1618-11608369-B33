@@ -140,3 +140,70 @@ int main()
                 
             }
         }
+        if(run!=NULL && (time)<((run->rect)+tq) && run->flag!=2)
+        {
+            if(start!=NULL)
+            {
+                if(run->Priority < start->q->Priority &&  start->q->Arrival_Time == time)   //if higher priority process com in existence
+                {
+                    printf("\nContext switching happening as priority of process P%d is greater than priority of process P%d",start->q->i,run->i);
+                    cn=new node;
+                    cn->q=run;
+                    cn->next=NULL;
+                    node *x;
+                    x=start;
+                    while (x->next!=NULL && x->next->q->Priority > cn->q->Priority)
+                    {
+                        x=x->next;
+                    }
+                    cn->next=x->next;
+                    x->next=cn;
+                    run=NULL;
+                    goto back;
+                }
+            }
+            run->burl--;
+            fflush(stdin);
+            printf("\n\tprocess %d running at time %d",run->i,time);
+            if(run->burl==0)                                                    //when process got completed
+            {
+                run->flag=2;
+                pl--;
+                run->compt=(time+1);
+                run->TurnAround_Time=((run->compt)-(run->Arrival_Time));
+                run->Waiting_time=((run->TurnAround_Time)-(run->Burst_time));
+                run=NULL;
+            }
+            else if((time+1)==((run->rect)+tq))
+            {
+                cn=new node;
+                cn->q=run;
+                cn->next=NULL;
+                if(start==NULL)
+                {
+                    last=cn;
+                    start=cn;
+                }
+                else
+                {
+                    node *x;
+                    x=start;
+                    if((start->q->Priority)<(cn->q->Priority))
+                    {
+                        cn->next=start;
+                        start=cn;
+                    }
+                    else
+                    {
+                        while(x->next!=NULL && x->next->q->Priority >= cn->q->Priority)
+                        {
+                            x=x->next;
+                        }
+                        cn->next=x->next;
+                        x->next=cn;
+                    }
+                    run=NULL;
+                }
+            }
+        }
+    }
