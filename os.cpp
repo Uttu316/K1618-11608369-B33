@@ -207,3 +207,24 @@ int main()
             }
         }
     }
+     printf("\n\n\n Details after scheduling are :");
+    printf("\n __________________________________________________________________________________________________________________________");
+    printf("\n|\tPROCESS\t|\tARRIVAL TIME\t|\tBURST TIME\t|\tPRIORITY\t| WAITING TIME\t| TURN AROUND TIME |");
+    printf("\n|_______________|_______________________|_______________________|_______________________|_______________|__________________|");
+    for(int i=0;i<n;i++)
+    {
+        printf("\n|\tP%d\t|\t%d\t\t|\t%d\t\t|\t%d\t\t|\t%d     \t|\t    %d      |",p[i].i,p[i].Arrival_Time,p[i].Burst_time,p[i].Priority,p[i].Waiting_time,p[i].TurnAround_Time);
+        printf("\n|_______________|_______________________|_______________________|_______________________|_______________|__________________|");
+    }
+    float Avg_Arrival_Time=0,Avg_TurnAround_Time=0;
+    for(int i=0;i<n;i++)
+    {
+        Avg_Arrival_Time=Avg_Arrival_Time+p[i].Waiting_time;
+        Avg_TurnAround_Time=Avg_TurnAround_Time+p[i].TurnAround_Time;
+    }
+    Avg_Arrival_Time=Avg_Arrival_Time/n;
+    Avg_TurnAround_Time=Avg_TurnAround_Time/n;
+    printf("\nAverage  waiting time = %f ",Avg_Arrival_Time);
+    printf("\nAverage Turn Around Time = %f \n",Avg_TurnAround_Time);
+    getch();
+}
